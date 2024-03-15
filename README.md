@@ -32,7 +32,8 @@
 - arr.sort(key=lambda x: len(x)) # custom sort
 - arr = [i for i in range(5)] # 1d array
 - arr = [[0] * 4 for i in range(4)] # 2d array
-- reverse()
+- arr.reverse()
+- reversed(array)
 - len(list)
 - arr[-1] # last element
 - arr[1:3] # exclude 3rd index
@@ -189,6 +190,7 @@ numbers.sort(reverse=True)
 
 # Error Handling
 ```python
+x, y = 0
 try:
     result = x / y
 except ZeroDivisionError:
