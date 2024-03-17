@@ -47,8 +47,9 @@
 - dict = {key1: [], key2: []} # list(dict.values()) to convert the values to a list. values will be list of list.
 
 # Set
-- set() or set(my_list) # create empty set # {} creates a dictionary
+- set() or set(my_list)# create empty set # {} creates a dictionary
 - add(elem)
+- set = {1,2,3}
 - my_set = { i for i in range(5) }
 - len(my_set)
 - 1 in my_set
@@ -72,6 +73,11 @@
 - items() # key and value
 - dict1.update(dict_2)
 
+# Empty
+- len(stack)==0
+- not stack # return true if stack is empty
+- works for most datastructures
+
 # Slicing
 ```python
 my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -93,6 +99,12 @@ print(my_string[::2])  # Output: "Hlo ol!"
 - my_tuple.count(value)
 - my_tuple.index(value) or my_tuple.index(value, start, end) # gives key error if not found
 - value in my_tuple
+
+# Stack 
+- stack = []
+- list.append(element) # Push (add an element to the top of the stack)
+- element = list.pop() # Pop (remove the top element from the stack)
+- element = list[-1] # Peek (get the top element without removing)
 
 # Deque
 - my_deque = deque()
@@ -227,6 +239,27 @@ print(squared_nums)  # Output: [1, 4, 9, 16, 25]
 from functools import reduce
 total = reduce(lambda x, y: x + y, nums)
 print(total)  # Output: 15
+```
+
+# Functions within Functions
+- doesn't need self syntax
+- can use variables from outer function. no need to pass variables
+```python
+class Solution:
+    def generateParenthesis(self, n: int) -> list[str]:
+        def generate(current, open, close):
+            if len(current) == n * 2:
+                result.append(current)
+                return
+
+            if open < n:
+                generate(current + "(", open + 1, close)
+            if close < open:
+                generate(current + ')', open, close + 1)
+
+        result = []
+        generate("", 0, 0)
+        return result
 ```
 
 # Regex
