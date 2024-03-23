@@ -1,3 +1,9 @@
+# General
+- Use `is None` instead of `== None`
+  - `== None` calls the __eq__ method of the object. `==` can return True or False depending on how __eq__ is implemented for custom objects.
+  - `is None` checks if the value is exactly the None object. This is preferred.
+- `while head:` or `if not head:` can be used instead of `while head is not None` or `if head is None:`
+
 # Int
 - int("123")
 - min() or max()
