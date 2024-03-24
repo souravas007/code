@@ -19,4 +19,3 @@ class Solution:
             result.append(s[i:j])
             i = j
         return result
-   

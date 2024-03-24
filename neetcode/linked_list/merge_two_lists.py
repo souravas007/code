@@ -21,5 +21,3 @@ class Solution:
         if list2:
             curr.next = list2
         return result.next
-
-
