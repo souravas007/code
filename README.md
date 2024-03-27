@@ -11,6 +11,7 @@
 
 - int("123")
 - min() or max()
+- abs()
 
 # String
 
