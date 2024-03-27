@@ -39,6 +39,7 @@
 - append(x)
 - list1.extend(list2) or list1 = [*list1, *list2]
 - insert(index, element)
+- list1.copy() # create copy of list
 - remove(x) # raise errors if not exist
 - pop() or pop(index)
 - sort() or sort(reverse=True)
