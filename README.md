@@ -12,6 +12,7 @@
 - int("123")
 - min() or max()
 - abs()
+- 2**3 # shortcut for math.pow(2, 3)
 
 # String
 
