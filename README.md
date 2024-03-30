@@ -203,6 +203,68 @@ for task in priority_queue:
 - the comparison starts with the first element of each tuple. If the first elements are equal, Python compares the
   second elements, and so on.
 
+# Comprehensions
+
+- arr = [x + 1 for x in range(5)]
+- max_heap = [(12, [0, 1])]
+    - [point for (dist, point) in max_heap]
+- evens = [number for number in range(50) if number % 2 == 0]
+
+```python
+options = ["any", "w", "zh"]
+string_start_with_a_and_end_with_y = [
+    string
+    for string in options
+    if len(string) >= 2
+    if string[0] == "a"
+    if string[-1] == "y"
+]
+```
+
+```python
+
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flattened1 = [num for row in matrix for num in row]
+# exterior for loop is first. then, interior for loops.
+
+flattened2 = []
+for row in matrix:
+    for num in row:
+        flattened2.append(num)
+
+```
+
+```python
+categories = [
+    "Even" if x % 2 == 0 else "Odd" for x in range(10)
+]
+```
+
+```python
+def square(x):
+    return x ** 2
+
+
+squared_numbers = [square(x) for x in range(10)]
+```
+
+```python
+# dictionary comprehension
+pairs = [("a", 1), ("b", 2), ("c", 3)]
+my_dict = {k: v for k, v in pairs}
+```
+
+```python
+# set comprehension
+nums = [1, 1, 2]
+unique_squares = {x ** 2 for x in nums}
+```
+
+```python
+# generator comprehension
+sum_of_squares = sum(x ** 2 for x in range(1000000))
+```
+
 # Custom sorting
 
 ```python
@@ -240,7 +302,7 @@ numbers.sort(reverse=True)
 # Error Handling
 
 ```python
-x, y = 0
+x, y = 0, 0
 try:
     result = x / y
 except ZeroDivisionError:
@@ -287,21 +349,20 @@ print(total)  # Output: 15
 - can use variables from outer function. no need to pass variables
 
 ```python
-class Solution:
-    def generateParenthesis(self, n: int) -> list[str]:
-        def generate(current, open, close):
-            if len(current) == n * 2:
-                result.append(current)
-                return
+def generate_parenthesis(n: int) -> list[str]:
+    def generate(current, open_count, close_count):
+        if len(current) == n * 2:
+            result.append(current)
+            return
 
-            if open < n:
-                generate(current + "(", open + 1, close)
-            if close < open:
-                generate(current + ')', open, close + 1)
+        if open_count < n:
+            generate(current + "(", open_count + 1, close_count)
+        if close_count < open_count:
+            generate(current + ')', open_count, close_count + 1)
 
-        result = []
-        generate("", 0, 0)
-        return result
+    result = []
+    generate("", 0, 0)
+    return result
 ```
 
 # Regex
