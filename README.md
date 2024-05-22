@@ -31,6 +31,7 @@
 - s.isalpha() or s.isdigit() or s.isalnum()
 - "abc" * 3 # returns 'abcabcabc'
 - ord(character) -> returns ascii value
+- arr = [0]*26; arr[ord(str[i]) - ord('a')] += 1
 
 # List
 
@@ -44,14 +45,14 @@
 - remove(x) # raise errors if not exist
 - pop() or pop(index)
 - sort() or sort(reverse=True)
-- arr.sort(key=lambda x: len(x)) # custom sort
+- arr.sort(key=lambda x: len(x)) # custom sort using length of element in ascending order.
 - arr = [i for i in range(5)] # 1d array
 - arr = [[0] * 4 for i in range(4)] # 2d array
 - arr.reverse()
 - reversed(array)
 - len(list)
 - arr[-1] # last element
-- arr[1:3] # exclude 3rd index
+- arr[1:3] # exclude 0th & 3rd index 
 - for i in range(len(nums)): pass # use index
 - for n in nums: # use value
 - for i, n in enumerate(nums): # use index & value
@@ -60,12 +61,13 @@
 - min() or max()
 - sum()
 - dict = {key1: [], key2: []} # list(dict.values()) to convert the values to a list. values will be list of list.
+- new_list = old_list[:] # copy list by value
 
 # Set
 
 - set() or set(my_list)# create empty set # {} creates a dictionary
-- add(elem)
 - set = {1,2,3}
+- add(elem)
 - my_set = { i for i in range(5) }
 - len(my_set)
 - 1 in my_set
@@ -74,16 +76,16 @@
 - discard(element) # does not raise error
 - | -> union()
 - & -> intersection()
--
-    - -> difference()
-- ^ -> symmetric_difference()
+- - -> difference() # all elements in a, but not in b
+- ^ -> symmetric_difference() # all elements in a or b, but not in both
 
 # Dictionary
 
 - my_map = {}
+- my_map = {'(': ')', '{': '}', '[': ']'}
 - my_map['key'] # raise KeyError if key doesn't exist
 - my_map = { i: 2*i for i in range(3) }
-- get(key) or get(key, 'default') # does not raise error if key not exist
+- get(key) or get(key, 'default') # if value does not exist, it returns None
 - len(my_map)
 - pop(key) or pop(key, 'default') # pop without default raise key error
 - keys()
@@ -127,6 +129,7 @@ print(my_string[::2])  # Output: "Hlo ol!"
 - list.append(element) # Push (add an element to the top of the stack)
 - element = list.pop() # Pop (remove the top element from the stack)
 - element = list[-1] # Peek (get the top element without removing)
+- list[-1] < list[-2] # Compare values in stack
 
 # Deque
 
@@ -164,7 +167,7 @@ print(my_string[::2])  # Output: "Hlo ol!"
 
 - min_heap = [] # by default, it's minheap. uses array under the hood.
 - heapq.heapify(x): Transform list x into a heap.
-- while len(minHeap): print(heapq.heappop(minHeap)) # tranverse min heap
+- while len(minHeap): print(heapq.heappop(minHeap)) # transverse min heap
 - heapq.heappush(heap, item): Push a new item onto the heap.
 - heapq.heappop(heap): Pop the smallest item off the heap.
 - min_heap[0] # minimum value always at index 0
