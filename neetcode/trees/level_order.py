@@ -13,7 +13,7 @@ class Solution:
         queue.append(root)
 
         while len(queue) > 0:
-            current_result = []
+            current_result = []  # creates new array in a new memory location
             size = len(queue)
             for i in range(size):
                 element = queue.popleft()
@@ -22,5 +22,5 @@ class Solution:
                     queue.append(element.left)
                 if element.right:
                     queue.append(element.right)
-            result.append(current_result.copy())
+            result.append(current_result)  # current_result.copy() isn't required here.
         return result
