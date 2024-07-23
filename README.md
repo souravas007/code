@@ -16,14 +16,15 @@
 
 # String
 
-- my_list = s.split(sep='')
+- strings are immutable. any operation that modifies a string, will return a new string.
+- my_list = s.split() or my_list = s.split(sep='#')
 - ''.join(my_list)
-- s.find(key) or s.find(key, start, end)
+- s.find(key) or s.find(key, start, end) # returns -1 if not found. else index
 - s[0:2]
-- s += "def"
+- s += "def" # doesn't modify inplace. uses -> s = s + "def"
 - str(123)
-- s.replace(old, new)
-- s.strip(' ')
+- s.replace(old, new) # returns new string
+- s.strip(' ')  # returns new string
 - len(string)
 - sorted(string) # can't use .sort() on immutable types # sorted returns list & not string.
 - ''.join(sorted(string)) # convert the list which sorted gives to string. sorted returns list.
@@ -31,7 +32,8 @@
 - s.isalpha() or s.isdigit() or s.isalnum()
 - "abc" * 3 # returns 'abcabcabc'
 - ord(character) -> returns ascii value
-- arr = [0]*26; arr[ord(str[i]) - ord('a')] += 1
+- arr = [0]*26;
+- arr[ord(str[i]) - ord('a')] += 1 # get count of all characters in string
 
 # List
 
@@ -39,13 +41,13 @@
 - [1, 2, 3] * 2 # returns [1, 2, 3, 1, 2, 3]
 - alphabets = [0] * 26 or alphabets = [0 for i in range(26)]
 - append(x)
-- list1.extend(list2) or list1 = [*list1, *list2]
+- list1 = [*list1, *list2]
 - insert(index, element)
-- list1.copy() # create copy of list
+- list1.copy() or - new_list = old_list[:] # create copy of list
 - remove(x) # raise errors if not exist
-- pop() or pop(index)
+- pop() or pop(index) # remove last element or index
 - sort() or sort(reverse=True)
-- arr.sort(key=lambda x: len(x)) # custom sort using length of element in ascending order.
+- arr.sort(key=lambda x: len(x)) # custom sort using length of element in ascending order. # len exists in string. not in integers.
 - arr = [i for i in range(5)] # 1d array
 - arr = [[0] * 4 for i in range(4)] # 2d array
 - arr.reverse()
@@ -60,8 +62,7 @@
 - sorted(my_list) # returns new sorted array
 - min() or max()
 - sum()
-- dict = {key1: [], key2: []} # list(dict.values()) to convert the values to a list. values will be list of list.
-- new_list = old_list[:] # copy list by value
+- dict = {"key1": [], "key2": []} # list(dict.values()) to convert the values to a list. values will be list of list. # [[], []]
 
 # Set
 
@@ -91,7 +92,7 @@
 - keys()
 - values()
 - items() # key and value
-- dict1.update(dict_2)
+- z = {**x, **y}  or  z = x | y # merge two dictionary
 
 # Empty
 
@@ -133,6 +134,7 @@ print(my_string[::2])  # Output: "Hlo ol!"
 
 # Deque
 
+- from collections import deque
 - my_deque = deque()
 - append(x): Add x to the right side.
 - appendleft(x): Add x to the left side.
@@ -145,16 +147,18 @@ print(my_string[::2])  # Output: "Hlo ol!"
 
 # Counter
 
+- from collections import Counter
 - char_count = Counter("banana") or Counter(my_list)
 - print(char_count)  # Output: Counter({'a': 3, 'b': 1, 'n': 2})
 - elements(): Return an iterator over elements repeating each as many times as its count.
-- most_common([n]): Return a list of the n most common elements and their counts.
+- most_common(n): Return a list of the n most common elements and their counts.
 - [element for element, count in counter.most_common(k)] # most_common returns tuple. use list comprehension to get only
   keys.
 - subtract([iterable-or-mapping]): Subtract elements count from the counter.
 
 # Default Dict
 
+- from collections import defaultdict
 - Usage: defaultdict(default_factory_function), where default_factory_function provides the default value for a new key.
 - dict = defaultdict(int) # int() is inbuilt a function which gives 0
 - dict = defaultdict(str) # str() is inbuilt function with empty value
@@ -165,6 +169,7 @@ print(my_string[::2])  # Output: "Hlo ol!"
 
 # Heapq
 
+- import heapq  # not part of collections
 - min_heap = [] # by default, it's minheap. uses array under the hood.
 - heapq.heapify(x): Transform list x into a heap.
 - while len(minHeap): print(heapq.heappop(minHeap)) # transverse min heap
@@ -291,6 +296,7 @@ numbers.sort(reverse=True)
 
 # Math
 
+- import math
 - math.sqrt(x): Return the square root of x.
 - math.pow(x, y): Return x raised to the power of y.
 - math.floor(3 / 2)
@@ -416,14 +422,11 @@ print(my_fun(3, 4))
 # Nested functions have access to outer variables
 def outer(a, b):
     c = "c"
-
     def inner():
         return a + b + c
-
     return inner()
 
-
-print(outer("a", "b"))
+print(outer("a", "b")) # returns abc
 
 
 # Can modify objects but not reassign
@@ -436,7 +439,6 @@ def double(arr, val):
 
         # will only modify val in the helper scope
         # val *= 2
-
         # this will modify val outside helper scope
         nonlocal val
         val *= 2
@@ -447,7 +449,7 @@ def double(arr, val):
 
 nums = [1, 2]
 val = 3
-double(nums, val)
+double(nums, val) # prints [2, 4] 6. val became double because nonlocal scope was used. # nums array became double.
 ```
 
 # Class
@@ -493,7 +495,7 @@ print(5 / 2)  # decimal
 print(5 // 2)  # int result
 
 print(-3 // 2)  # -2 -> most languages round towards 0 for negative. but python moves away from 0 & gives smaller value
-print(int(-3 / 2))  # -1 -> fixes the above issue and moves towards 0 for negatives.
+print(int(-3 / 2))  # -1 -> fixes the above issue and moves towards 0 for negatives. # int moves towards 0.
 
 import math
 
