@@ -23,13 +23,13 @@ abs()
 my_list = s.split() # splits by whitespace 
 my_list = s.split(sep='#') # custom split
 ''.join(my_list)
-s.find(key)
+s.find(key) # returns -1 if not found. else index
 s.find(key, start, end) # returns -1 if not found. else index
 s[0:2]
 s += "def" # doesn't modify inplace -> s = s + "def"
 str(123)
-s.replace(old, new) # returns new string
-s.strip(' ') # returns new string
+s.replace(old, new) # returns new string with all old characters replaced by new
+s.strip(' ') # returns new string with whitespace removed from both ends
 len(string)
 sorted(string) # can't use .sort() on immutable types # sorted returns list & not string.
 ''.join(sorted(string)) # convert the list which sorted gives to string. Sorted returns list.
@@ -39,20 +39,25 @@ s.isalpha()
 s.isdigit()
 s.isalnum()
 "abc" * 3 # returns 'abcabcabc'
-ord(character) # returns ascii value
+ord(character) # returns ascii value. a = 97. A = 65.
 arr = [0]*26
-arr[ord(str[i]) - ord('a')] += 1 # get count of characters in string
+
+s = "my_string"
+for i in range(len(s)):
+    arr[ord(s[i]) - ord('a')] += 1  # Count occurrences of each character
+print(arr) # array with count of each character.
 ```
 
 # List
 ```python
 [1] * n # returns [1, 1, 1, 1, 1]
 [1, 2, 3] * 2 # returns [1, 2, 3, 1, 2, 3]
+list("sourav") # ['s', 'o', 'u', 'r', 'a', 'v']
 alphabets = [0] * 26
 alphabets = [0 for i in range(26)]
-append(x)
+list1.append(element)
 list1 = [*list1, *list2]
-insert(index, element)
+insert(index, element) # if index is out of bound then element is added to the end.
 
 # copy
 list1.copy() # create copy of list
@@ -61,15 +66,18 @@ import copy
 shallow_copy = old_list.copy()  # Creates a shallow copy
 deep_copy = copy.deepcopy(old_list)  # Creates a deep copy
 
-remove(x) # raise errors if not exist
-pop() # remove last element
-pop(index) # remove element at index
-sort() # asc
-sorted(my_list) # returns new sorted array
-sort(reverse=True) # desc
-arr.reverse() # inplace
-reversed(array) # returns new list
+remove(x) #  remove element. raise errors if not exist.
+pop() # remove last element. raise errors if empty.
+pop(index) # remove element at index. raises error if index out of bound.
+sort() # asc. inplace sort.
+sort(reverse=True) # desc. inplace sort.
+sorted(my_list) # asc. returns new sorted array
+sorted(my_list, reverse=True) # desc. returns new sorted array
+arr.reverse() # inplace reversal
+reversed(array) # returns iterator. doesn't return list.
+list(reversed(array)) # returns new reversed list.
 arr.sort(key=lambda x: len(x)) # custom sort using length of element in ascending order. len() exists in strings, not in integers.
+arr.sort(key=lambda x: len(str(x)), reverse=True)
 arr = [i for i in range(5)] # 1d array
 arr = [[0] * 4 for i in range(4)] # 2d array
 len(list)
@@ -94,7 +102,7 @@ my_set = {1,2,3} # empty {} creates a dictionary
 add(elem)
 my_set = { i for i in range(5) }
 len(my_set)
-1 in my_set
+1 in my_set # return Boolean
 my_set.update(iterable) # iterable can be set or list or tuple or string
 remove(element) # raise key error if not present
 discard(element) # does not raise error
@@ -188,6 +196,10 @@ print(char_count) # Output: Counter({'a': 3, 'b': 1, 'n': 2})
 
 elements = list(char_count.elements()) # Convert the iterator to a list. Output: ['b', 'a', 'a', 'a', 'n', 'n'].
 common_elements = char_count.most_common(n) # Return a list of the n most common elements and their counts
+
+# return array of most common k keys from an array
+[key for key, value in Counter(nums).most_common(k)]
+
 top_keys = [element for element, count in char_count.most_common(k)] # most_common returns tuple. Use list comprehension to get only keys
 char_count.subtract([iterable-or-mapping]) # Subtract elements count from the counter
 ```
@@ -201,6 +213,8 @@ my_dict = defaultdict(str) # str() is inbuilt function that returns empty string
 my_dict = defaultdict(list) # list() is inbuilt function that returns an empty list
 my_dict = defaultdict(set) # set() is inbuilt function that returns an empty set
 my_dict = defaultdict(lambda: "specific default value") # lambda is a function. if we give just a string without lambda, it raises error.
+my_dict['2'] # Return 'specific default value'
+my_dict.get('2') # Return None. Doesn't trigger default value.
 ```
 
 # Heapq
@@ -263,10 +277,17 @@ nums = [1, 1, 2]
 unique_squares = {x ** 2 for x in nums}
 
 # Generator comprehension
+## This doesn't create tuples. 
 sum_of_squares = sum(x ** 2 for x in range(1000000))
 
+# Tuple comprehension
+## tuple() is required for creating tuples.
+squares = tuple(x**2 for x in range(10))
+
 # Conditional comprehension
+## if expression used for filtering goes at the end, and if-else for assigning values goes at the start of the comprehension.
 categories = ["Even" if x % 2 == 0 else "Odd" for x in range(10)]
+
 options = ["any", "w", "zh"]
 string_start_with_a_and_end_with_y = [
     string
@@ -305,6 +326,9 @@ for row in matrix:
 numbers = [3, 1, 4, 1, 5, 9, 2]
 sorted_numbers = sorted(numbers, reverse=True)
 numbers.sort(reverse=True)
+
+# hash_map contains keys and their count. return k keys which has largest count.
+[key for key, value in sorted(hash_map.items(), key = lambda x: -x[1])][:k]
 ```
 
 # Custom sorting
@@ -316,7 +340,6 @@ people.sort(key=lambda person: person[1])  # Output will be sorted by age
 people = [('Alice', 30), ('Bob', 25), ('Charlie', 30)]
 sorted_people = sorted(people, key=lambda person: (person[1], person[0]))  # Sort by age, then by name
 people.sort(key=lambda person: (person[1], person[0]))  # Sort by age, then by name
-
 ```
 
 # Itertools
@@ -501,6 +524,8 @@ print(squared)  # Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 ```python
 # Generator expression
 squares = (x**2 for x in range(10))
+next(squares) # 0
+next(squares) # 1, then, 4 and so on until 81. then, raises StopIteration at the end.
 
 # Simple generator function
 def simple_gen():
@@ -513,6 +538,7 @@ gen = simple_gen()
 print(next(gen))  # Output: 1
 print(next(gen))  # Output: 2
 print(next(gen))  # Output: 3
+print(next(gen))  # Raise StopIteration Error
 ```
 
 # Functions
@@ -538,17 +564,12 @@ def double(arr, val):
         # Modifying array works.
         for i, n in enumerate(arr):
             arr[i] *= 2
-
-        # This will only modify val in the helper scope
-        # val *= 2
-        
+        # val *= 2 will only modify val in the helper scope
         # This will modify val outside the helper scope
         nonlocal val
         val *= 2
-
     helper()
     print(arr, val)
-
 
 nums = [1, 2]
 val = 3
@@ -633,15 +654,12 @@ class Point:
 
 p = Point(1, 2)
 print(p.x, p.y)  # Output: 1 2
-
 ```
 
 # Types 
 ```python
-
 def greet(name: str) -> str:
     return f"Hello, {name}"
-
 ```
 
 # Syntax Essentials
