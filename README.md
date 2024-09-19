@@ -78,6 +78,9 @@ reversed(array) # returns iterator. doesn't return list.
 list(reversed(array)) # returns new reversed list.
 arr.sort(key=lambda x: len(x)) # custom sort using length of element in ascending order. len() exists in strings, not in integers.
 arr.sort(key=lambda x: len(str(x)), reverse=True)
+
+arr1 == arr2 # check if two array values are equal
+
 arr = [i for i in range(5)] # 1d array
 arr = [[0] * 4 for i in range(4)] # 2d array
 len(list)
@@ -680,6 +683,13 @@ else:
 for i in range(5, 1, -1):
 	pass # Loop from 5 to 2
 
+# For loop with range
+## At the beginning of each iteration, the loop variable i is assigned the next value from the iterator returned by range(0, 10)
+## If you modify i inside the loop, it doesn't affect the sequence of values that i will take in subsequent iterations.
+The loop continues to assign the next value from the range to i, overwriting any changes made inside the loop.
+for i in range(0, 10):
+	i += 10 # i becomes 10 in the current iteration. but in the next iteration, i becomes 1.	
+	
 # Division Operations
 print(5 / 2) # Output: 2.5 (float division)
 print(5 // 2) # Output: 2 (floor division)
