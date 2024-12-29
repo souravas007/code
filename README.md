@@ -21,7 +21,7 @@ abs()
 # strings are immutable. modifying string creates new string
 
 my_list = s.split() # splits by whitespace 
-my_list = s.split(sep='#') # custom split
+my_list = s.split('#') or my_list = s.split(sep='#')
 ''.join(my_list)
 s.find(key) # returns -1 if not found. else index
 s.find(key, start, end) # returns -1 if not found. else index
@@ -33,11 +33,17 @@ s.strip(' ') # returns new string with whitespace removed from both ends
 len(string)
 sorted(string) # can't use .sort() on immutable types # sorted returns list & not string.
 ''.join(sorted(string)) # convert the list which sorted gives to string. Sorted returns list.
+
 s.upper()
 s.lower()
-s.isalpha()
-s.isdigit()
-s.isalnum()
+
+s.isalpha() # (a-z, A-Z)
+s.isdigit() # (0-9) # negative sign isn't allowed
+s.isalnum() # (a-z, A-Z, 0-9)
+s.isspace() # (' ', \t, \n, etc.)
+s.islower()
+s.isupper()
+
 "abc" * 3 # returns 'abcabcabc'
 ord(character) # returns ascii value. a = 97. A = 65.
 arr = [0]*26
@@ -93,7 +99,7 @@ for n1, n2 in zip(nums1, nums2): # loop through multiple arrays simultaneously w
 min()
 max()
 sum()
-my_dict = {"key1": [], "key2": []}
+my_dict = {"key1": [], "key2": []} 
 list(my_dict.values()) # convert values to a list: [[], []]
 ```
 
@@ -121,16 +127,22 @@ my_map = {}
 my_map = {'(': ')', '{': '}', '[': ']'}
 my_map['key'] # raise KeyError if key doesn't exist
 my_map = {i: 2*i for i in range(3)}
+if key in my_map: # check if key exists in dict
 value = my_map.get('key') # returns 'None' if key does not exist
 my_map.get('key', 'default') # returns 'default' if key does not exist
+my_map['c'] = 3 # Adds a new key 'c' with value 3
 len(my_map)
 popped_value = my_map.pop('key') # raises KeyError if key doesn't exist
 my_map.pop('key', 'default') # returns default if key doesn't exist
 keys = my_map.keys()
 values = my_map.values()
 items = my_map.items() # returns key-value pairs
+for key, value in my_dict.items(): # use key-value pairs
 merged_dict = {**x, **y} # merge two dictionaries
 merged_dict = x | y # merge two dictionaries
+# if you need 2 dimensions, just use tuple as key with 2 values:
+cache = defaultdict(bool)
+cache[(row,col)] = True
 ```
 
 # Empty
@@ -197,7 +209,7 @@ char_count = Counter("banana")
 char_count = Counter(my_list)
 print(char_count) # Output: Counter({'a': 3, 'b': 1, 'n': 2})
 
-elements = list(char_count.elements()) # Convert the iterator to a list. Output: ['b', 'a', 'a', 'a', 'n', 'n'].
+elements = list(char_count.elements()) # Convert the iterator to a list. Output: ['b', 'a', 'a', 'a', 'n', 'n']. duplicate characters will exist as per their count.
 common_elements = char_count.most_common(n) # Return a list of the n most common elements and their counts
 
 # return array of most common k keys from an array
@@ -215,9 +227,13 @@ my_dict = defaultdict(int) # int() is inbuilt a function that returns 0
 my_dict = defaultdict(str) # str() is inbuilt function that returns empty string
 my_dict = defaultdict(list) # list() is inbuilt function that returns an empty list
 my_dict = defaultdict(set) # set() is inbuilt function that returns an empty set
+my_dict = defaultdict(bool) # bool() is inbuilt function that returns False
 my_dict = defaultdict(lambda: "specific default value") # lambda is a function. if we give just a string without lambda, it raises error.
 my_dict['2'] # Return 'specific default value'
 my_dict.get('2') # Return None. Doesn't trigger default value.
+# if you need 2 dimensions, just use tuple as key with 2 values:
+cache = defaultdict(bool)
+cache[(row,col)] = True
 ```
 
 # Heapq
@@ -253,7 +269,7 @@ heapq.heappush(priority_queue, (1, 'Task 1'))
 heapq.heappush(priority_queue, (3, 'Task 3'))
 heapq.heappush(priority_queue, (2, 'Task 2'))
 highest_priority = heapq.heappop(priority_queue)
-print(f"Highest priority task: {highest_priority}")
+print(f"Highest priority task: {highest_priority}") # 1, 'Task 1'
 
 # The rest of the queue
 print("Remaining tasks in the queue:")
